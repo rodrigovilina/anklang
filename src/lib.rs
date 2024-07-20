@@ -1,10 +1,11 @@
 mod atom;
+pub mod l_parens;
 mod lex;
+pub mod node;
 mod number;
 mod parse;
 mod r_parens;
-pub mod l_parens;
-pub mod node;
+mod symbol;
 pub mod token;
 pub mod unit;
 pub mod unlex;
@@ -40,11 +41,35 @@ pub fn parse_all(tokens: &[Token]) -> Vec<Node> {
 mod tests {
   use {super::*, unparse::Unparse};
 
-  #[test]
-  fn test_1() {
-    let tokens = lex_all("123");
+  fn test_helper(input: &str, output: &str) {
+    let tokens = lex_all(input);
     let nodes = parse_all(&tokens);
     let node = nodes.first().unwrap().clone();
-    assert_eq!(node.unparse(), "123")
+    assert_eq!(node.unparse(), output)
+  }
+
+  #[test]
+  fn test_0() {
+    test_helper("()", "()");
+    test_helper(" ()", "()");
+    test_helper("() ", "()");
+    test_helper(" () ", "()");
+    test_helper(" ( ) ", "()");
+  }
+
+  #[test]
+  fn test_1() {
+    test_helper("123", "123");
+    test_helper(" 123", "123");
+    test_helper("123 ", "123");
+    test_helper(" 123 ", "123");
+  }
+
+  #[test]
+  fn test_2() {
+    test_helper("abc", "abc");
+    test_helper(" abc", "abc");
+    test_helper("abc ", "abc");
+    test_helper(" abc ", "abc");
   }
 }

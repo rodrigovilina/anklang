@@ -1,4 +1,4 @@
-use crate::{unlex::Unlex, lex::Lex, Token};
+use crate::{lex::Lex, unlex::Unlex, Token};
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct LParens();

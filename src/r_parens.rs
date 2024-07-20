@@ -1,5 +1,5 @@
 use {
-  crate::{unlex::Unlex, lex::Lex, Token},
+  crate::{lex::Lex, unlex::Unlex, Token},
   std::str::Chars,
 };
 

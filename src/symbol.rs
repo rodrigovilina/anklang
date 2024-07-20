@@ -4,21 +4,21 @@ use {
 };
 
 #[derive(Debug, PartialEq, Eq)]
-pub struct Number(String);
+pub struct Symbol(String);
 
-impl Unlex for Number {
+impl Unlex for Symbol {
   fn unlex(&self) -> &str {
     &self.0
   }
 }
 
-impl Lex for Number {
+impl Lex for Symbol {
   fn lex(input: &str) -> Option<(Token, &str)> {
-    let re: Regex = Regex::new(r"^-?(0|[1-9]\d*)").unwrap();
+    let re = Regex::new(r"^[^\d()]\S*").unwrap();
     if let Some(mat) = re.find(input) {
-      let number: i64 = mat.as_str().parse().unwrap();
+      let symbol = mat.as_str().to_string();
       let rest: &str = &input[mat.end()..];
-      Some((Token::Number(number), rest))
+      Some((Token::Symbol(symbol), rest))
     } else {
       None
     }
@@ -31,11 +31,11 @@ mod tests {
 
   #[test]
   fn test_1() {
-    assert_eq!(Number("0".to_string()).unlex(), "0")
+    assert_eq!(Symbol("a".to_string()).unlex(), "a")
   }
 
   #[test]
   fn test_2() {
-    assert_eq!(Number::lex("0"), Some((Token::Number(0), "")))
+    assert_eq!(Symbol::lex("a"), Some((Token::Symbol("a".to_string()), "")))
   }
 }

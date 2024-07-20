@@ -3,12 +3,14 @@ use crate::{parse::Parse, unparse::Unparse, Node, Token};
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum Atom {
   Number(i64),
+  Symbol(String),
 }
 
 impl Unparse for Atom {
   fn unparse(&self) -> String {
     match self {
-      Atom::Number(n) => format!("{}", n)
+      Atom::Number(n) => format!("{}", n),
+      Atom::Symbol(s) => s.to_string(),
     }
   }
 }
@@ -17,6 +19,7 @@ impl Parse for Atom {
   fn parse(tokens: &[Token]) -> Option<(Node, &[Token])> {
     match tokens {
       [Token::Number(n), rest @ ..] => Some((Node::Atom(Atom::Number(*n)), rest)),
+      [Token::Symbol(s), rest @ ..] => Some((Node::Atom(Atom::Symbol(s.to_string())), rest)),
       _ => None,
     }
   }

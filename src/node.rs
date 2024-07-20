@@ -8,8 +8,7 @@ pub enum Node {
 
 impl Parse for Node {
   fn parse(tokens: &[Token]) -> Option<(Self, &[Token])> {
-    Unit::parse(tokens)
-      .or_else(|| Atom::parse(tokens))
+    Unit::parse(tokens).or_else(|| Atom::parse(tokens))
   }
 }
 

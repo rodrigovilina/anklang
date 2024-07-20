@@ -1,4 +1,7 @@
-use {std::io::{self, BufRead, Write}, yapl::{lex_all, node::Node, parse_all, unparse::Unparse}};
+use {
+  std::io::{self, BufRead, Write},
+  yapl::{lex_all, node::Node, parse_all, unparse::Unparse},
+};
 
 fn main() {
   print(&read());
@@ -14,9 +17,9 @@ fn read() -> Node {
   let read_result = stdin.read_line(&mut buffer);
 
   match read_result {
-    Ok(0) => {},
-    Ok(_) => {},
-    Err(_) => {},
+    Ok(0) => {}
+    Ok(_) => {}
+    Err(_) => {}
   };
 
   let tokens = lex_all(&buffer);
