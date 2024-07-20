@@ -4,8 +4,8 @@ use crate::{parse::Parse, unparse::Unparse, Node, Token};
 pub struct Unit();
 
 impl Unparse for Unit {
-  fn unparse(&self) -> &str {
-    "()"
+  fn unparse(&self) -> String {
+    "()".to_string()
   }
 }
 
@@ -24,7 +24,7 @@ mod tests {
 
   #[test]
   fn test_1() {
-    let result: &str = Unit().unparse();
+    let result = Unit().unparse();
     assert_eq!(result, "()");
   }
 

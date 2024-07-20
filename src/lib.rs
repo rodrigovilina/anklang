@@ -1,11 +1,13 @@
-pub mod l_parens;
+mod atom;
 mod lex;
+mod number;
 mod parse;
 mod r_parens;
+pub mod l_parens;
+pub mod node;
+pub mod token;
 pub mod unit;
 pub mod unlex;
-pub mod token;
-pub mod node;
 pub mod unparse;
 
 use {lex::Lex, node::Node, parse::Parse, token::Token};
@@ -32,4 +34,17 @@ pub fn parse_all(tokens: &[Token]) -> Vec<Node> {
   }
 
   nodes
+}
+
+#[cfg(test)]
+mod tests {
+  use {super::*, unparse::Unparse};
+
+  #[test]
+  fn test_1() {
+    let tokens = lex_all("123");
+    let nodes = parse_all(&tokens);
+    let node = nodes.first().unwrap().clone();
+    assert_eq!(node.unparse(), "123")
+  }
 }

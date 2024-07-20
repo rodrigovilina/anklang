@@ -1,12 +1,32 @@
-use yapl::{l_parens::LParens, lex_all, node::Node, parse_all, token::Token, unlex::Unlex, unparse::Unparse};
+use {std::io::{self, BufRead, Write}, yapl::{lex_all, node::Node, parse_all, unparse::Unparse}};
 
 fn main() {
-  let input: &str = "()";
-  let tokens: Vec<Token> = lex_all(input);
-  let nodes: Vec<Node> = parse_all(&tokens);
+  print(&read());
+}
 
-  dbg!(tokens);
+fn read() -> Node {
+  let mut buffer = String::with_capacity(2048);
+  let mut stdin = io::stdin().lock();
+
+  print!("|> ");
+  io::stdout().flush().unwrap();
+
+  let read_result = stdin.read_line(&mut buffer);
+
+  match read_result {
+    Ok(0) => {},
+    Ok(_) => {},
+    Err(_) => {},
+  };
+
+  let tokens = lex_all(&buffer);
+  dbg!(tokens.clone());
+  let nodes = parse_all(&tokens);
   dbg!(nodes.clone());
-  dbg!(nodes.first().unwrap().unparse());
-  dbg!(LParens().unlex());
+  nodes.first().unwrap().clone()
+}
+
+fn print(node: &Node) {
+  let output = node.unparse();
+  println!("You entered: {}", output);
 }
