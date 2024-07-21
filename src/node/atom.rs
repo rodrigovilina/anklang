@@ -10,7 +10,7 @@ impl Unparse for Atom {
   fn unparse(&self,) -> String {
     match self {
       Self::Number(n,) => format!("{}", n),
-      Self::Symbol(s,) => s.to_string(),
+      Self::Symbol(sym,) => sym.to_string(),
     }
   }
 }
@@ -19,7 +19,9 @@ impl Parse for Atom {
   fn parse(tokens: &[Token],) -> Option<(Node, &[Token],),> {
     match tokens {
       [Token::Number(n,), rest @ ..] => Some((Node::Atom(Self::Number(*n,),), rest,),),
-      [Token::Symbol(s,), rest @ ..] => Some((Node::Atom(Self::Symbol(s.to_string(),),), rest,),),
+      [Token::Symbol(sym,), rest @ ..] => {
+        Some((Node::Atom(Self::Symbol(sym.to_string(),),), rest,),)
+      },
       _ => None,
     }
   }

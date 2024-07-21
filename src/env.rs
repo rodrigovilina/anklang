@@ -1,5 +1,5 @@
 use {
-  crate::{atom::Atom, node::Node},
+  crate::node::{atom::Atom, Node},
   std::collections::HashMap,
 };
 
@@ -28,15 +28,15 @@ impl Env {
   pub fn eval(&mut self, node: &Node,) -> Node {
     match node {
       Node::Unit => Node::Unit,
-      Node::Atom(a,) => match a {
+      Node::Atom(atom,) => match atom {
         Atom::Number(_,) => node.clone(),
         Atom::Symbol(_,) => todo!(),
       },
-      Node::List(l,) => {
-        if let Some(Node::Atom(Atom::Symbol(s,),),) = l.0.first() {
-          if let Some(Function(f,),) = self.get(s,) {
-            let args = &l.0[1..];
-            f(args,)
+      Node::List(list,) => {
+        if let Some(Node::Atom(Atom::Symbol(sym,),),) = list.0.first() {
+          if let Some(Function(func,),) = self.get(sym,) {
+            let args = &list.0[1..];
+            func(args,)
           } else {
             node.clone()
           }

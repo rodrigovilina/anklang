@@ -1,9 +1,9 @@
-mod l_parens;
+mod lpar;
 mod number;
-mod r_parens;
+mod rpar;
 mod symbol;
 
-use {crate::lex::Lex, l_parens::LParens, number::Number, r_parens::RParens, symbol::Symbol};
+use {crate::lex::Lex, lpar::LParens, number::Number, rpar::RParens, symbol::Symbol};
 
 #[derive(Debug, PartialEq, Eq, Clone,)]
 pub enum Token {

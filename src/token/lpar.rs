@@ -22,5 +22,5 @@ impl Lex for LParens {
 }
 
 #[cfg(test)]
-#[path = "../tests/l_parens_tests.rs"]
-mod l_parens_tests;
+#[path = "../tests/lpar_tests.rs"]
+mod lpar_tests;

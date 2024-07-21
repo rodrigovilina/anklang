@@ -19,7 +19,7 @@ impl Lex for Number {
       let number: i64 = mat.as_str().parse().unwrap();
       let rest: &str = &input[mat.end()..];
       (Token::Number(number,), rest,)
-    })
+    },)
   }
 }
 

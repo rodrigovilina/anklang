@@ -1,10 +1,9 @@
 use {
   std::io::{self, BufRead, Write},
   yapl::{
-    atom::Atom,
     env::{Env, Function},
     lex_all,
-    node::Node,
+    node::{atom::Atom, Node},
     parse_all,
     unparse::Unparse,
   },

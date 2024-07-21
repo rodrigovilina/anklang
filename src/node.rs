@@ -1,4 +1,11 @@
-use crate::{atom::Atom, list::List, parse::Parse, token::Token, unit::Unit, unparse::Unparse};
+pub mod atom;
+mod unit;
+
+use {
+  crate::{list::List, parse::Parse, token::Token, unparse::Unparse},
+  atom::Atom,
+  unit::Unit,
+};
 
 #[derive(Debug, PartialEq, Clone,)]
 pub enum Node {
@@ -19,8 +26,8 @@ impl Unparse for Node {
   fn unparse(&self,) -> String {
     match self {
       Self::Unit => Unit.unparse(),
-      Self::Atom(a,) => a.unparse(),
-      Self::List(l,) => l.unparse(),
+      Self::Atom(atom,) => atom.unparse(),
+      Self::List(list,) => list.unparse(),
     }
   }
 }

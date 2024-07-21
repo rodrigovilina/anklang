@@ -19,7 +19,7 @@ impl Lex for Symbol {
       let symbol = mat.as_str().to_string();
       let rest: &str = &input[mat.end()..];
       (Token::Symbol(symbol,), rest,)
-    })
+    },)
   }
 }
 
