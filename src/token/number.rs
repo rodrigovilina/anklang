@@ -15,13 +15,11 @@ impl Unlex for Number {
 impl Lex for Number {
   fn lex(input: &str,) -> Option<(Token, &str,),> {
     let re: Regex = Regex::new(r"^-?(0|[1-9]\d*)",).unwrap();
-    if let Some(mat,) = re.find(input,) {
+    re.find(input,).map(|mat| {
       let number: i64 = mat.as_str().parse().unwrap();
       let rest: &str = &input[mat.end()..];
-      Some((Token::Number(number,), rest,),)
-    } else {
-      None
-    }
+      (Token::Number(number,), rest,)
+    })
   }
 }
 

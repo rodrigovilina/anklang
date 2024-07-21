@@ -18,9 +18,9 @@ impl Parse for Node {
 impl Unparse for Node {
   fn unparse(&self,) -> String {
     match self {
-      Node::Unit => Unit().unparse(),
-      Node::Atom(a,) => a.unparse(),
-      Node::List(l,) => l.unparse(),
+      Self::Unit => Unit.unparse(),
+      Self::Atom(a,) => a.unparse(),
+      Self::List(l,) => l.unparse(),
     }
   }
 }

@@ -15,13 +15,11 @@ impl Unlex for Symbol {
 impl Lex for Symbol {
   fn lex(input: &str,) -> Option<(Token, &str,),> {
     let re = Regex::new(r"^[^\d()\s][^()\s]*",).unwrap();
-    if let Some(mat,) = re.find(input,) {
+    re.find(input,).map(|mat| {
       let symbol = mat.as_str().to_string();
       let rest: &str = &input[mat.end()..];
-      Some((Token::Symbol(symbol,), rest,),)
-    } else {
-      None
-    }
+      (Token::Symbol(symbol,), rest,)
+    })
   }
 }
 

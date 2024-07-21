@@ -4,7 +4,7 @@ use {
 };
 
 #[derive(Debug, PartialEq, Eq,)]
-pub struct RParens();
+pub struct RParens;
 
 impl Unlex for RParens {
   fn unlex(&self,) -> &str {
@@ -30,7 +30,7 @@ mod tests {
 
   #[test]
   fn test_1() {
-    let result = RParens().unlex();
+    let result = RParens.unlex();
     assert_eq!(result, ")");
   }
 

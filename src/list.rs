@@ -37,7 +37,7 @@ impl Parse for List {
               return None;
             }
           }
-          return Some((Node::List(List(nodes,),), &remaining[1..],),);
+          return Some((Node::List(Self(nodes,),), &remaining[1..],),);
         }
       }
     }

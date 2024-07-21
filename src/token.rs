@@ -5,7 +5,7 @@ mod symbol;
 
 use {crate::lex::Lex, l_parens::LParens, number::Number, r_parens::RParens, symbol::Symbol};
 
-#[derive(Debug, PartialEq, Clone,)]
+#[derive(Debug, PartialEq, Eq, Clone,)]
 pub enum Token {
   LP,
   RP,

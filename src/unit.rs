@@ -1,7 +1,7 @@
 use crate::{parse::Parse, unparse::Unparse, Node, Token};
 
 #[derive(Debug, PartialEq, Eq,)]
-pub struct Unit();
+pub struct Unit;
 
 impl Unparse for Unit {
   fn unparse(&self,) -> String {
@@ -24,7 +24,7 @@ mod tests {
 
   #[test]
   fn test_1() {
-    let result = Unit().unparse();
+    let result = Unit.unparse();
     assert_eq!(result, "()");
   }
 

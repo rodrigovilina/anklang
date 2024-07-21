@@ -1,3 +1,17 @@
+#![deny(clippy::complexity)]
+#![deny(clippy::expect_used)]
+#![deny(clippy::nursery)]
+#![deny(clippy::panic)]
+#![deny(clippy::perf)]
+#![deny(clippy::empty_structs_with_brackets)]
+#![deny(clippy::min_ident_chars)]
+// #![warn(clippy::unwrap_used)]
+// #![warn(clippy::pedantic)]
+//
+// #![deny(clippy::restriction)]
+// #![allow(clippy::implicit_return)]
+// #![allow(clippy::missing_docs_in_private_items)]
+
 pub mod atom;
 pub mod env;
 mod lex;

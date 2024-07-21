@@ -1,7 +1,7 @@
 use crate::{lex::Lex, unlex::Unlex, Token};
 
 #[derive(Debug, PartialEq, Eq,)]
-pub struct LParens();
+pub struct LParens;
 
 impl Unlex for LParens {
   fn unlex(&self,) -> &str {

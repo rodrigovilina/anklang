@@ -9,8 +9,8 @@ pub enum Atom {
 impl Unparse for Atom {
   fn unparse(&self,) -> String {
     match self {
-      Atom::Number(n,) => format!("{}", n),
-      Atom::Symbol(s,) => s.to_string(),
+      Self::Number(n,) => format!("{}", n),
+      Self::Symbol(s,) => s.to_string(),
     }
   }
 }
@@ -18,8 +18,8 @@ impl Unparse for Atom {
 impl Parse for Atom {
   fn parse(tokens: &[Token],) -> Option<(Node, &[Token],),> {
     match tokens {
-      [Token::Number(n,), rest @ ..] => Some((Node::Atom(Atom::Number(*n,),), rest,),),
-      [Token::Symbol(s,), rest @ ..] => Some((Node::Atom(Atom::Symbol(s.to_string(),),), rest,),),
+      [Token::Number(n,), rest @ ..] => Some((Node::Atom(Self::Number(*n,),), rest,),),
+      [Token::Symbol(s,), rest @ ..] => Some((Node::Atom(Self::Symbol(s.to_string(),),), rest,),),
       _ => None,
     }
   }

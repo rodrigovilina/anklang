@@ -2,7 +2,7 @@ use super::*;
 
 #[test]
 fn test_1() {
-  let result = LParens().unlex();
+  let result = LParens.unlex();
   assert_eq!(result, "(");
 }
 
