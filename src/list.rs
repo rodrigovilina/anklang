@@ -1,7 +1,7 @@
 use crate::{parse::Parse, unparse::Unparse, Node, Token};
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct List(Vec<Node>);
+pub struct List(pub Vec<Node>);
 
 impl Unparse for List {
   fn unparse(&self) -> String {

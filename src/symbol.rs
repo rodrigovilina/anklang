@@ -14,7 +14,7 @@ impl Unlex for Symbol {
 
 impl Lex for Symbol {
   fn lex(input: &str) -> Option<(Token, &str)> {
-    let re = Regex::new(r"^[^\d()]\S*").unwrap();
+    let re = Regex::new(r"^[^\d()\s][^()\s]*").unwrap();
     if let Some(mat) = re.find(input) {
       let symbol = mat.as_str().to_string();
       let rest: &str = &input[mat.end()..];

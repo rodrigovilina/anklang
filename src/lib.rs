@@ -1,4 +1,5 @@
-mod atom;
+pub mod atom;
+pub mod env;
 pub mod l_parens;
 mod lex;
 mod list;
@@ -77,5 +78,24 @@ mod tests {
   #[test]
   fn test_3() {
     test_helper("(123)", "(123)");
+    test_helper("( 123 )", "(123)");
+  }
+
+  #[test]
+  fn test_4() {
+    test_helper("(123 123)", "(123 123)");
+    test_helper("(  123   123  )", "(123 123)");
+  }
+
+  #[test]
+  fn test_5() {
+    test_helper("(())", "(())");
+    test_helper("((()))", "((()))");
+    test_helper("(()())", "(() ())");
+  }
+
+  #[test]
+  fn test_6() {
+    test_helper("(  + 2   (*  3  4)  )", "(+ 2 (* 3 4))")
   }
 }

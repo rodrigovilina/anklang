@@ -1,10 +1,33 @@
 use {
   std::io::{self, BufRead, Write},
-  yapl::{lex_all, node::Node, parse_all, unparse::Unparse},
+  yapl::{
+    atom::Atom,
+    env::{Env, Function},
+    lex_all,
+    node::Node,
+    parse_all,
+    unparse::Unparse,
+  },
 };
 
 fn main() {
-  print(&read());
+  let mut env = Env::new();
+
+  let add = Function(Box::new(|args: &[Node]| -> Node {
+    let mut sum = 0;
+    for arg in args {
+      if let Node::Atom(Atom::Number(n)) = arg {
+        sum += n;
+      }
+    }
+    Node::Atom(Atom::Number(sum))
+  }));
+
+  env.define("+".to_string(), add);
+
+  loop {
+    print(&env.eval(&read()));
+  }
 }
 
 fn read() -> Node {
