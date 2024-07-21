@@ -3,21 +3,21 @@ use {
   std::str::Chars,
 };
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq,)]
 pub struct RParens();
 
 impl Unlex for RParens {
-  fn unlex(&self) -> &str {
+  fn unlex(&self,) -> &str {
     ")"
   }
 }
 
 impl Lex for RParens {
-  fn lex(input: &str) -> Option<(Token, &str)> {
-    if input.starts_with(')') {
+  fn lex(input: &str,) -> Option<(Token, &str,),> {
+    if input.starts_with(')',) {
       let mut chars: Chars = input.chars();
       chars.next();
-      Some((Token::RP, chars.as_str()))
+      Some((Token::RP, chars.as_str(),),)
     } else {
       None
     }
@@ -36,13 +36,13 @@ mod tests {
 
   #[test]
   fn test_2() {
-    let result = RParens::lex(")");
+    let result = RParens::lex(")",);
     assert_eq!(result, Some((Token::RP, "")));
   }
 
   #[test]
   fn test_3() {
-    let result = RParens::lex(")a");
+    let result = RParens::lex(")a",);
     assert_eq!(result, Some((Token::RP, "a")));
   }
 }

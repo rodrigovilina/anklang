@@ -1,21 +1,26 @@
-use crate::{l_parens::LParens, lex::Lex, number::Number, r_parens::RParens, symbol::Symbol};
+mod l_parens;
+mod number;
+mod r_parens;
+mod symbol;
 
-#[derive(Debug, PartialEq, Clone)]
+use {crate::lex::Lex, l_parens::LParens, number::Number, r_parens::RParens, symbol::Symbol};
+
+#[derive(Debug, PartialEq, Clone,)]
 pub enum Token {
   LP,
   RP,
-  Number(i64),
-  Symbol(String),
+  Number(i64,),
+  Symbol(String,),
 }
 
 impl Lex for Token {
-  fn lex(input: &str) -> Option<(Self, &str)> {
+  fn lex(input: &str,) -> Option<(Self, &str,),> {
     let input = input.trim();
 
-    LParens::lex(input)
-      .or_else(|| RParens::lex(input))
-      .or_else(|| Number::lex(input))
-      .or_else(|| Symbol::lex(input))
+    LParens::lex(input,)
+      .or_else(|| RParens::lex(input,),)
+      .or_else(|| Number::lex(input,),)
+      .or_else(|| Symbol::lex(input,),)
   }
 }
 

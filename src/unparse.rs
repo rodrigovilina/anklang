@@ -1,3 +1,3 @@
 pub trait Unparse {
-  fn unparse(&self) -> String;
+  fn unparse(&self,) -> String;
 }

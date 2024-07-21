@@ -3,22 +3,22 @@ use {
   regex::Regex,
 };
 
-#[derive(Debug, PartialEq, Eq)]
-pub struct Number(String);
+#[derive(Debug, PartialEq, Eq,)]
+pub struct Number(String,);
 
 impl Unlex for Number {
-  fn unlex(&self) -> &str {
+  fn unlex(&self,) -> &str {
     &self.0
   }
 }
 
 impl Lex for Number {
-  fn lex(input: &str) -> Option<(Token, &str)> {
-    let re: Regex = Regex::new(r"^-?(0|[1-9]\d*)").unwrap();
-    if let Some(mat) = re.find(input) {
+  fn lex(input: &str,) -> Option<(Token, &str,),> {
+    let re: Regex = Regex::new(r"^-?(0|[1-9]\d*)",).unwrap();
+    if let Some(mat,) = re.find(input,) {
       let number: i64 = mat.as_str().parse().unwrap();
       let rest: &str = &input[mat.end()..];
-      Some((Token::Number(number), rest))
+      Some((Token::Number(number,), rest,),)
     } else {
       None
     }

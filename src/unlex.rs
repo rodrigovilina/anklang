@@ -1,3 +1,3 @@
 pub trait Unlex {
-  fn unlex(&self) -> &str;
+  fn unlex(&self,) -> &str;
 }
