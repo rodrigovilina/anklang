@@ -8,10 +8,10 @@ impl Unparse for List {
     let inner = self
       .0
       .iter()
-      .map(|node| node.unparse(),)
+      .map(super::super::unparse::Unparse::unparse,)
       .collect::<Vec<_,>>()
       .join(" ",);
-    format!("({})", inner)
+    format!("({inner})")
   }
 }
 

@@ -9,7 +9,7 @@ pub enum Atom {
 impl Unparse for Atom {
   fn unparse(&self,) -> String {
     match self {
-      Self::Number(n,) => format!("{}", n),
+      Self::Number(n,) => format!("{n}"),
       Self::Symbol(sym,) => sym.to_string(),
     }
   }

@@ -29,11 +29,11 @@ mod tests {
 
   #[test]
   fn test_1() {
-    assert_eq!(Symbol("a".to_string()).unlex(), "a")
+    assert_eq!(Symbol("a".to_string()).unlex(), "a");
   }
 
   #[test]
   fn test_2() {
-    assert_eq!(Symbol::lex("a"), Some((Token::Symbol("a".to_string()), "")))
+    assert_eq!(Symbol::lex("a"), Some((Token::Symbol("a".to_string()), "")));
   }
 }

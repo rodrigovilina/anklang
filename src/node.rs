@@ -1,9 +1,11 @@
 pub mod atom;
+mod list;
 mod unit;
 
 use {
-  crate::{list::List, parse::Parse, token::Token, unparse::Unparse},
+  crate::{parse::Parse, token::Token, unparse::Unparse},
   atom::Atom,
+  list::List,
   unit::Unit,
 };
 

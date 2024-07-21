@@ -1,12 +1,13 @@
 #![deny(clippy::complexity)]
-#![deny(clippy::expect_used)]
 #![deny(clippy::nursery)]
-#![deny(clippy::panic)]
+#![deny(clippy::pedantic)]
 #![deny(clippy::perf)]
+
 #![deny(clippy::empty_structs_with_brackets)]
+#![deny(clippy::expect_used)]
 #![deny(clippy::min_ident_chars)]
+#![deny(clippy::panic)]
 // #![warn(clippy::unwrap_used)]
-// #![warn(clippy::pedantic)]
 //
 // #![deny(clippy::restriction)]
 // #![allow(clippy::implicit_return)]
@@ -14,7 +15,6 @@
 
 pub mod env;
 mod lex;
-mod list;
 pub mod node;
 mod parse;
 pub mod token;
@@ -23,6 +23,7 @@ pub mod unparse;
 
 use {lex::Lex, node::Node, parse::Parse, token::Token};
 
+#[must_use]
 pub fn lex_all(input: &str,) -> Vec<Token,> {
   let mut tokens = Vec::new();
   let mut remainder = input;
@@ -35,6 +36,7 @@ pub fn lex_all(input: &str,) -> Vec<Token,> {
   tokens
 }
 
+#[must_use]
 pub fn parse_all(tokens: &[Token],) -> Vec<Node,> {
   let mut nodes = Vec::new();
   let mut remainder = tokens;
@@ -55,7 +57,7 @@ mod tests {
     let tokens = lex_all(input,);
     let nodes = parse_all(&tokens,);
     let node = nodes.first().unwrap().clone();
-    assert_eq!(node.unparse(), output)
+    assert_eq!(node.unparse(), output);
   }
 
   #[test]
@@ -104,6 +106,6 @@ mod tests {
 
   #[test]
   fn test_6() {
-    test_helper("(  + 2   (*  3  4)  )", "(+ 2 (* 3 4))",)
+    test_helper("(  + 2   (*  3  4)  )", "(+ 2 (* 3 4))",);
   }
 }

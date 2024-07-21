@@ -30,21 +30,21 @@ mod tests {
 
   #[test]
   fn test_1() {
-    assert_eq!(Token::lex("("), Some((Token::LP, "")))
+    assert_eq!(Token::lex("("), Some((Token::LP, "")));
   }
 
   #[test]
   fn test_2() {
-    assert_eq!(Token::lex(")"), Some((Token::RP, "")))
+    assert_eq!(Token::lex(")"), Some((Token::RP, "")));
   }
 
   #[test]
   fn test_3() {
-    assert_eq!(Token::lex("0"), Some((Token::Number(0), "")))
+    assert_eq!(Token::lex("0"), Some((Token::Number(0), "")));
   }
 
   #[test]
   fn test_4() {
-    assert_eq!(Token::lex("a"), Some((Token::Symbol("a".to_string()), "")))
+    assert_eq!(Token::lex("a"), Some((Token::Symbol("a".to_string()), "")));
   }
 }

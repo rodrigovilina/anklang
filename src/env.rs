@@ -11,12 +11,14 @@ pub struct Env {
 }
 
 impl Env {
+  #[must_use]
   pub fn new() -> Self {
     Self {
       map: HashMap::new(),
     }
   }
 
+  #[must_use]
   pub fn get(&self, name: &str,) -> Option<&Function,> {
     self.map.get(name,)
   }

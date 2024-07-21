@@ -29,11 +29,11 @@ mod tests {
 
   #[test]
   fn test_1() {
-    assert_eq!(Number("0".to_string()).unlex(), "0")
+    assert_eq!(Number("0".to_string()).unlex(), "0");
   }
 
   #[test]
   fn test_2() {
-    assert_eq!(Number::lex("0"), Some((Token::Number(0), "")))
+    assert_eq!(Number::lex("0"), Some((Token::Number(0), "")));
   }
 }
