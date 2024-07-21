@@ -1,6 +1,7 @@
 mod atom;
 pub mod l_parens;
 mod lex;
+mod list;
 pub mod node;
 mod number;
 mod parse;
@@ -71,5 +72,10 @@ mod tests {
     test_helper(" abc", "abc");
     test_helper("abc ", "abc");
     test_helper(" abc ", "abc");
+  }
+
+  #[test]
+  fn test_3() {
+    test_helper("(123)", "(123)");
   }
 }
