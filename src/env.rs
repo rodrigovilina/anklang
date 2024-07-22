@@ -19,7 +19,9 @@ impl Env {
     };
 
     env.define("+".to_string(), Node::Function(Box::new(Function::add())));
+    env.define("*".to_string(), Node::Function(Box::new(Function::mul())));
     env.define("-".to_string(), Node::Function(Box::new(Function::sub())));
+    env.define("/".to_string(), Node::Function(Box::new(Function::div())));
     env
   }
 
@@ -50,25 +52,33 @@ impl Env {
         Atom::Symbol(_) | Atom::Number(_) => node.clone(),
       },
       Node::List(list) => match &**list {
-        List::Single(first) => {
-          match &**first {
-            Node::Unit => Node::Unit,
-            Node::Atom(_) => *first.clone(),
-            Node::List(_) => todo!(),
-            Node::Function(_) => todo!(),
-        }
-        },
-        List::Multi { first, rest } => match &**first {
+        List::Single(first) => match &**first {
           Node::Unit => Node::Unit,
           Node::Atom(atom) => match atom {
-            Atom::Number(_) => todo!(),
+            Atom::Number(_) => *first.clone(),
+            Atom::Symbol(sym) => match self.get(sym) {
+              Some(Node::Function(func)) => {
+                let args = &[];
+                func.0(args)
+              },
+              Some(_) => todo!(),
+              None => todo!(),
+            },
+          },
+          Node::List(_) => self.eval(first),
+          Node::Function(_) => todo!(),
+        },
+        List::Multi { first, rest } => match &**first {
+          Node::Unit => node.clone(),
+          Node::Atom(atom) => match atom {
+            Atom::Number(_) => node.clone(),
             Atom::Symbol(sym) => match self.get(sym) {
               Some(Node::Function(func)) => {
                 let args = &rest;
                 func.0(args)
               },
               Some(_) => todo!(),
-              None => todo!(),
+              None => todo!("Method {} not found", sym),
             },
           },
           Node::List(_) => todo!(),

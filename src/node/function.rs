@@ -11,7 +11,7 @@ pub struct Function(pub Alias);
 impl PartialEq for Function {
   fn eq(&self, _other: &Self) -> bool {
     // Function comparison is inherently not supported.
-    // You could compare based on identity or other metadata if needed.
+    // Compare based on identity or other metadata if needed.
     false
   }
 }
@@ -37,10 +37,36 @@ impl Function {
   }
 
   #[must_use]
+  pub fn mul() -> Self {
+    Self(Rc::new(|args: &[Node]| -> Node {
+      let mut result = 1;
+      for arg in args {
+        if let Node::Atom(Atom::Number(n)) = arg {
+          result *= n;
+        }
+      }
+      Node::Atom(Atom::Number(result))
+    }))
+  }
+
+  #[must_use]
   pub fn sub() -> Self {
     Self(Rc::new(|args: &[Node]| -> Node {
       let result: i64 = match args {
+        [Node::Atom(Atom::Number(left))] => 0 - left,
         [Node::Atom(Atom::Number(left)), Node::Atom(Atom::Number(right))] => left - right,
+        _ => todo!(),
+      };
+      Node::Atom(Atom::Number(result))
+    }))
+  }
+
+  #[must_use]
+  pub fn div() -> Self {
+    Self(Rc::new(|args: &[Node]| -> Node {
+      let result: i64 = match args {
+        [Node::Atom(Atom::Number(left))] => 1 / left,
+        [Node::Atom(Atom::Number(left)), Node::Atom(Atom::Number(right))] => left / right,
         _ => todo!(),
       };
       Node::Atom(Atom::Number(result))
