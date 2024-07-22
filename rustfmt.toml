@@ -4,5 +4,5 @@ imports_granularity = "One"
 match_block_trailing_comma = true
 reorder_impl_items = true
 tab_spaces = 2
-trailing_comma = "Always"
+trailing_comma = "Vertical"
 use_field_init_shorthand = true

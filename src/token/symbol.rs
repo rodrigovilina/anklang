@@ -1,25 +1,28 @@
 use {
-  crate::{lex::Lex, unlex::Unlex, Token},
+  crate::{
+    lexer::{Lex, Unlex},
+    Token,
+  },
   regex::Regex,
 };
 
-#[derive(Debug, PartialEq, Eq,)]
-pub struct Symbol(String,);
+#[derive(Debug, PartialEq, Eq)]
+pub struct Symbol(String);
 
 impl Unlex for Symbol {
-  fn unlex(&self,) -> &str {
+  fn unlex(&self) -> &str {
     &self.0
   }
 }
 
 impl Lex for Symbol {
-  fn lex(input: &str,) -> Option<(Token, &str,),> {
-    let re = Regex::new(r"^[^\d()\s][^()\s]*",).unwrap();
-    re.find(input,).map(|mat| {
+  fn lex(input: &str) -> Option<(Token, &str)> {
+    let re = Regex::new(r"^[^\d()\s][^()\s]*").unwrap();
+    re.find(input).map(|mat| {
       let symbol = mat.as_str().to_string();
       let rest: &str = &input[mat.end()..];
-      (Token::Symbol(symbol,), rest,)
-    },)
+      (Token::Symbol(symbol), rest)
+    })
   }
 }
 

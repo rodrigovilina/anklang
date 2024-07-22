@@ -1,18 +1,21 @@
-use crate::{parse::Parse, unparse::Unparse, Node, Token};
+use crate::{
+  parser::{Parse, Unparse},
+  Node, Token,
+};
 
-#[derive(Debug, PartialEq, Eq,)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct Unit;
 
 impl Unparse for Unit {
-  fn unparse(&self,) -> String {
+  fn unparse(&self) -> String {
     "()".to_string()
   }
 }
 
 impl Parse for Unit {
-  fn parse(tokens: &[Token],) -> Option<(Node, &[Token],),> {
+  fn parse(tokens: &[Token]) -> Option<(Node, &[Token])> {
     match tokens {
-      [Token::LP, Token::RP, rest @ ..] => Some((Node::Unit, rest,),),
+      [Token::LP, Token::RP, rest @ ..] => Some((Node::Unit, rest)),
       _ => None,
     }
   }
